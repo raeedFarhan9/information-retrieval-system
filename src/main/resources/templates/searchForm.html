@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Spring Framework Guru</title>
+
+<!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+		<h2>GoogleUs</h2>
+		<div>
+			<form class="form-horizontal" th:action="@{/results}" method="post">
+				<div class="input-group has-feedback">
+					<input type="text" name="query" class="form-control" /> <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="submit">Go</button>
+					</span>
+				</div>
+			</form>
+		</div>
+<!-- th:with="i=${0}" -->
+		<div th:if="${not #lists.isEmpty(resultList)}">
+			<h2>Search Results:</h2>
+			<table class="table table-striped">
+				<tr>
+<!-- 					<th>ID</th> -->
+					<th>Name</th>
+					<th>Path</th>
+					<th>Score</th>
+				</tr>
+				<tr th:each="resultDTO : ${resultList}" >
+				
+					<td th:text="${resultDTO.name}"></td>
+					<td><a th:target="_blank" th:href="${'http://127.0.0.1:8887/' + resultDTO.name}" th:text="${resultDTO.path}"></a></td>
+					<td th:text="${resultDTO.score}"></td>
+				</tr>
+			</table>
+		</div>
+
+
+	</div>
+</body>
+</html>
